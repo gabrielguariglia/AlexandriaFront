@@ -26,7 +26,7 @@ function App() {
               />
               <Button variant="outline-success">Pesquisar</Button>
             </Form>
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#Home">Home</Nav.Link>
             <Nav.Link href="#Livros">Livros</Nav.Link>
             <Nav.Link href="#Autores">Autores</Nav.Link>
           </Nav>
