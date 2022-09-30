@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import domcasmurro from './Components/images/domcasmurro.png';
+import saci from './Components/images/saci.png';
+import mobydick from './Components/images/mobydick.png';
 
 function App() {
   return (
@@ -18,27 +20,47 @@ function App() {
             <Form className="d-flex">
               <Form.Control
                 type="search"
-                placeholder="Search"
+                placeholder="Pesquisar"
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
+              <Button variant="outline-success">Pesquisar</Button>
             </Form>
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="#features">Livros</Nav.Link>
+            <Nav.Link href="#pricing">Autores</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
 
 
       <Row className="justify-content-center">
-        <Card style={{ margin: '5%', left: '12cm', width: '15rem' }}>
+        <Card style={{ margin: '5%', width: '15rem' }}>
           <Card.Img variant="top" src={domcasmurro}/>
           <Card.Body>
-            <Card.Title>Placeholder</Card.Title>
+            <Card.Title>Dom Casmurro</Card.Title>
             <Card.Text>
-              Texto
+              Machado de Assis
+            </Card.Text>
+            <Button variant="primary">Ver Livro</Button>
+          </Card.Body>
+        </Card>
+        <Card style={{ margin: '5%', width: '15rem' }}>
+          <Card.Img variant="top" src={mobydick}/>
+          <Card.Body>
+            <Card.Title>Moby Dick</Card.Title>
+            <Card.Text>
+              Herman Melville
+            </Card.Text>
+            <Button variant="primary">Ver Livro</Button>
+          </Card.Body>
+        </Card>
+        <Card style={{ margin: '5%', width: '15rem' }}>
+          <Card.Img variant="top" src={saci}/>
+          <Card.Body>
+            <Card.Title>O Saci</Card.Title>
+            <Card.Text>
+              Monteiro Lobato
             </Card.Text>
             <Button variant="primary">Ver Livro</Button>
           </Card.Body>
