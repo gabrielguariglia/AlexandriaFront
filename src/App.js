@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import domcasmurro from './Components/images/domcasmurro.png';
 import saci from './Components/images/saci.png';
+import logo from './Components/images/logo.png';
 import mobydick from './Components/images/mobydick.png';
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
+          <img style={{ width: 40, height: 50 }}
+           src={logo} alt="React Logo"/>
           <Navbar.Brand href="#home">Alexandria</Navbar.Brand>
           <Nav className="me-auto">
             <Form className="d-flex">
