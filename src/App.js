@@ -1,21 +1,18 @@
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
-import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import domcasmurro from './Components/images/domcasmurro.png';
-import saci from './Components/images/saci.png';
 import logo from './Components/images/logo.png';
-import mobydick from './Components/images/mobydick.png';
+import saci from './Components/images/saci.png'
+import { Container, Row, Col } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
+
 
 function App() {
   return (
     <>
       <Navbar bg="dark" variant="dark">
-        <Container>
           <img style={{ width: 40, height: 50 }}
            src={logo} alt="React Logo"/>
           <Navbar.Brand href="#home">Alexandria</Navbar.Brand>
@@ -33,43 +30,30 @@ function App() {
             <Nav.Link href="#Livros">Livros</Nav.Link>
             <Nav.Link href="#Autores">Autores</Nav.Link>
           </Nav>
-        </Container>
       </Navbar>
 
-
-      <Row className="justify-content-center">
-        <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src={domcasmurro}/>
-          <Card.Body>
-            <Card.Title>Dom Casmurro</Card.Title>
-            <Card.Text>
-              Machado de Assis
-            </Card.Text>
-            <Button variant="primary">Ver Livro</Button>
-          </Card.Body>
-        </Card>
-        <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src={mobydick}/>
-          <Card.Body>
-            <Card.Title>Moby Dick</Card.Title>
-            <Card.Text>
-              Herman Melville
-            </Card.Text>
-            <Button variant="primary">Ver Livro</Button>
-          </Card.Body>
-        </Card>
-        <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src={saci}/>
-          <Card.Body>
-            <Card.Title>O Saci</Card.Title>
-            <Card.Text>
-              Monteiro Lobato
-            </Card.Text>
-            <Button variant="primary">Ver Livro</Button>
-          </Card.Body>
-        </Card>
-      </Row>
-
+      <Container className="justify-content-center">
+        <Col>
+          <Row>
+            <img style={{ margin: '6%', width: '25rem' }}
+              src={saci} alt="Imagem Livro" />
+            <Col>
+              <Table>
+                <tbody>
+                  <tr>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+        </Col>
+      </Container>
 
     </>
   );
