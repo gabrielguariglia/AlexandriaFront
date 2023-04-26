@@ -8,7 +8,7 @@ function App() {
     <>
     <Row className="justify-content-center">
         <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src=''/>
+          <Card.Img variant="top" src='{domcasmurro}'/>
           <Card.Body>
             <Card.Title>Dom Casmurro</Card.Title>
             <Card.Text>
@@ -18,7 +18,7 @@ function App() {
           </Card.Body>
         </Card>
         <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src=''/>
+          <Card.Img variant="top" src='{mobydick}'/>
           <Card.Body>
             <Card.Title>Moby Dick</Card.Title>
             <Card.Text>
@@ -28,7 +28,7 @@ function App() {
           </Card.Body>
         </Card>
         <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src=''/>
+          <Card.Img variant="top" src='{saci}'/>
           <Card.Body>
             <Card.Title>O Saci</Card.Title>
             <Card.Text>
@@ -37,10 +37,7 @@ function App() {
             <Button variant="primary">Ver Livro</Button>
           </Card.Body>
         </Card>
-        
       </Row>
-
-
     </>
   );
 }

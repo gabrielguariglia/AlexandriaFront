@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-import saci from './Components/images/saci.png'
 import { Container, Row, Col, Image, Table } from 'react-bootstrap';
 
 
