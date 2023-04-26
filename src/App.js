@@ -1,11 +1,9 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import logo from './Components/images/logo.png';
-
-function Home() {
-  return <h1>Home</h1>;
-}
+import Home from './Components/Pages/Home'
 
 function App() {
   return (

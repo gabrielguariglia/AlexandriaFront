@@ -2,16 +2,13 @@ import Row from 'react-bootstrap/Row'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import domcasmurro from './Components/images/domcasmurro.png';
-import saci from './Components/images/saci.png';
-import mobydick from './Components/images/mobydick.png';
 
 function App() {
   return (
     <>
     <Row className="justify-content-center">
         <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src={domcasmurro}/>
+          <Card.Img variant="top" src=''/>
           <Card.Body>
             <Card.Title>Dom Casmurro</Card.Title>
             <Card.Text>
@@ -21,7 +18,7 @@ function App() {
           </Card.Body>
         </Card>
         <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src={mobydick}/>
+          <Card.Img variant="top" src=''/>
           <Card.Body>
             <Card.Title>Moby Dick</Card.Title>
             <Card.Text>
@@ -31,7 +28,7 @@ function App() {
           </Card.Body>
         </Card>
         <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src={saci}/>
+          <Card.Img variant="top" src=''/>
           <Card.Body>
             <Card.Title>O Saci</Card.Title>
             <Card.Text>

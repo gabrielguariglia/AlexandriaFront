@@ -11,7 +11,7 @@ function Livro() {
         <Container style={{ height: '100%' }} className="d-flex align-items-center justify-content-center">
           <Row>
             <Col xs={12} md={4}>
-              <Image src={saci} fluid />
+              <Image src='' fluid />
             </Col>
             <Col xs={12} md={8}>
               <Table>
