@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import logo from './Components/images/logo.png';
 import Home from './Components/Pages/Home'
+import Livro from './Components/Pages/Livro'
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route exact path="/" element={<Home />} />
+        </Routes>
+        <Routes>
+        <Route exact path="/Livro" element={<Livro />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -19,7 +19,7 @@ function App() {
           </Card.Body>
         </Card>
         <Card style={{ margin: '5%', width: '15rem' }}>
-          <Card.Img variant="top" src='https://images.mubicdn.net/images/cast_member/2801/cache-590021-1600900173/image-w856.jpg'/>
+          <Card.Img variant="top" src=''/>
           <Card.Body>
             <Card.Title>Moby Dick</Card.Title>
             <Card.Text>
