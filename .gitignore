@@ -12,6 +12,8 @@
 /build
 
 # misc
+/.env
+/alexandria.php
 .DS_Store
 .env.local
 .env.development.local

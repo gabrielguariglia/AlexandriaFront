@@ -37,6 +37,12 @@ function App() {
         <Routes>
         <Route exact path="/Livro" element={<Livro />} />
         </Routes>
+        <Routes>
+        <Route exact path="/livros" element={<Livros />} />
+        </Routes>
+        <Routes>
+        <Route exact path="/autores" element={<Autores />} />
+        </Routes>
       </BrowserRouter>
     </>
   );
