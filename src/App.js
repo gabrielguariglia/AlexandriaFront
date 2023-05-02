@@ -5,6 +5,7 @@ import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import logo from './Components/images/logo.png';
 import Home from './Components/Pages/Home'
 import Livro from './Components/Pages/Livro'
+import Livros from './Components/Pages/Livros';
 
 function App() {
   return (
@@ -38,10 +39,7 @@ function App() {
         <Route exact path="/Livro" element={<Livro />} />
         </Routes>
         <Routes>
-        <Route exact path="/livros" element={<Livros />} />
-        </Routes>
-        <Routes>
-        <Route exact path="/autores" element={<Autores />} />
+        <Route exact path="/livros" element={<Livros/>} />
         </Routes>
       </BrowserRouter>
     </>
