@@ -11,12 +11,16 @@ function Livros() {
   const fetchLivros = async () => {
     try {
       const response = await fetch('https://alexandria2.000webhostapp.com/apilivros.php?key=');
+      if (!response.ok) {
+        throw new Error('Erro ao obter dados da API');
+      }
       const data = await response.json();
       setLivros([data]);
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   return (
     <div className="container mt-5">
