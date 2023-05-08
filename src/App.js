@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#Home">
+        <Navbar.Brand href="/">
           <img style={{ width: 40, height: 50, marginRight: 10 }} src={logo} alt="React Logo" />
           Alexandria
         </Navbar.Brand>

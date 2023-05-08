@@ -6,11 +6,11 @@ import { Container, Row, Col, Image, Table } from 'react-bootstrap';
 function Livro() {
   return (
     <>
-      <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ height: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Container style={{ height: '100%' }} className="d-flex align-items-center justify-content-center">
           <Row>
             <Col xs={12} md={4}>
-              <Image src='' fluid />
+              <Image src='https://m.media-amazon.com/images/I/61wS29IFXEL.jpg' fluid />
             </Col>
             <Col xs={12} md={8}>
               <Table>

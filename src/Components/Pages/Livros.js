@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { format } from 'date-fns';
 
 function Livros() {
+  const API_KEY = process.env.REACT_APP_API_KEY;
   const [livros, setLivros] = useState([]);
 
   useEffect(() => {
@@ -10,17 +12,16 @@ function Livros() {
 
   const fetchLivros = async () => {
     try {
-      const response = await fetch('https://alexandria2.000webhostapp.com/apilivros.php?key=');
+      const response = await fetch(`https://alexandria2.000webhostapp.com/apilivros.php?key=${API_KEY}`);
       if (!response.ok) {
         throw new Error('Erro ao obter dados da API');
       }
       const data = await response.json();
-      setLivros([data]);
+      setLivros(data.livros);
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   return (
     <div className="container mt-5">
@@ -28,19 +29,19 @@ function Livros() {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Título</th>
             <th scope="col">Autor</th>
+            <th scope="col">Género</th>
             <th scope="col">Ano</th>
           </tr>
         </thead>
         <tbody>
           {livros.map((livro, index) => (
             <tr key={index}>
-              <th scope="row">{livro.id}</th>
               <td>{livro.titulo}</td>
               <td>{livro.autor}</td>
-              <td>{livro.ano}</td>
+              <td>{livro.genero}</td>
+              <td>{format(new Date(livro.datapublicacao), 'dd/MM/yyyy')}</td>
             </tr>
           ))}
         </tbody>
