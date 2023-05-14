@@ -25,7 +25,7 @@ function App() {
             <Card.Text>
               Herman Melville
             </Card.Text>
-            <Button variant="primary">Ver Livro</Button>
+            <Button variant="primary" as={Link} to="/Test">Ver Livro</Button>
           </Card.Body>
         </Card>
         <Card style={{ margin: '5%', width: '15rem' }}>

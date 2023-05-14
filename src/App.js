@@ -6,6 +6,7 @@ import logo from './Components/images/logo.png';
 import Home from './Components/Pages/Home'
 import Livro from './Components/Pages/Livro'
 import Livros from './Components/Pages/Livros';
+import Test from './Components/Pages/Test'
 
 function App() {
   return (
@@ -27,7 +28,6 @@ function App() {
           </Form>
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/livros">Livros</Nav.Link>
-          <Nav.Link href="/autores">Autores</Nav.Link>
         </Nav>
       </Navbar>
 
@@ -40,6 +40,9 @@ function App() {
         </Routes>
         <Routes>
         <Route exact path="/livros" element={<Livros/>} />
+        </Routes>
+        <Routes>
+        <Route exact path="/Test" element={<Test/>} />
         </Routes>
       </BrowserRouter>
     </>
