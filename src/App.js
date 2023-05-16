@@ -6,7 +6,6 @@ import logo from './Components/images/logo.png';
 import Home from './Components/Pages/Home'
 import Livro from './Components/Pages/Livro'
 import Livros from './Components/Pages/Livros';
-import Test from './Components/Pages/Test'
 
 function App() {
   return (
@@ -32,17 +31,10 @@ function App() {
       </Navbar>
 
       <BrowserRouter>
-        <Routes>
-        <Route exact path="/" element={<Home />} />
-        </Routes>
-        <Routes>
-        <Route exact path="/Livro" element={<Livro />} />
-        </Routes>
-        <Routes>
-        <Route exact path="/livros" element={<Livros/>} />
-        </Routes>
-        <Routes>
-        <Route exact path="/Test" element={<Test/>} />
+      <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/livro/:id" element={<Livro />} />
+          <Route path="/livros" element={<Livros />} />
         </Routes>
       </BrowserRouter>
     </>

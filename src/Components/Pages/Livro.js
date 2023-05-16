@@ -1,9 +1,36 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import { Container, Row, Col, Image, Table } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Image, Table, Button } from 'react-bootstrap';
+import { format } from 'date-fns';
+import { useParams } from "react-router-dom";
 
+const Livro = () => {
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  const { id } = useParams();
+  const [livro, setLivro] = useState(null);
 
-function Livro() {
+  useEffect(() => {
+    const fetchLivro = async () => {
+      try {
+        const response = await fetch(`https://alexandria2.000webhostapp.com/apilivros.php?key=${API_KEY}`);
+        if (response.ok) {
+          const data = await response.json();
+          const livroFiltrado = data.livros.find(livro => livro.id === id);
+          setLivro(livroFiltrado);
+        } else {
+          throw new Error('Não foi possível buscar o livro.');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchLivro();
+  }, [id, API_KEY]);
+
+  if (!livro) {
+    return null; // ou renderize um componente de carregamento aqui
+  }
 
   return (
     <>
@@ -11,32 +38,32 @@ function Livro() {
         <Container style={{ height: '100%' }} className="d-flex align-items-center justify-content-center">
           <Row>
             <Col xs={12} md={4}>
-              <Image src='https://m.media-amazon.com/images/I/61wS29IFXEL.jpg' fluid />
+              <Image src={livro.capa} fluid />
             </Col>
             <Col xs={12} md={8}>
               <Table>
                 <thead>
                   <tr>
                     <th>Titulo</th>
-                    <th>O Saci</th>
+                    <th>{livro.titulo}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Autor</td>
-                    <td>Monteiro Lobato</td>
+                    <td>{livro.autor}</td>
                   </tr>
                   <tr>
                     <td>Lançamento</td>
-                    <td>1921</td>
+                    <td>{format(new Date(livro.datapublicacao), 'dd/MM/yyyy')}</td>
                   </tr>
                   <tr>
                     <td>Língua</td>
-                    <td>Português</td>
+                    <td>{livro.idioma}</td>
                   </tr>
                   <tr>
                     <td>Gênero</td>
-                    <td>Fantasia</td>
+                    <td>{livro.genero}</td>
                   </tr>
                 </tbody>
               </Table>
@@ -48,7 +75,6 @@ function Livro() {
           </Row>
         </Container>
       </div>
-
     </>
   );
 }
