@@ -25,7 +25,7 @@ function Livros() {
 
   return (
     <div className="container mt-5">
-      <h1 className="mb-5">Lista de Livros</h1>
+      <h1 className="mb-5">Livros disponíveis</h1>
       <table className="table table-striped">
         <thead>
           <tr>

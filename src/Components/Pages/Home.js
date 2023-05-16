@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
-import { Button, Row, Card } from 'react-bootstrap';
+import { Button, Row, Card, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function Home() {
@@ -26,7 +26,10 @@ function Home() {
   }, []);
 
   if (livros.length === 0) {
-    return <div>Carregando livros...</div>;
+    return <>
+    <Spinner animation="border" size="sm" variant="primary" />
+    Carregando livros...
+  </>
   }
 
   const renderLivros = () => {

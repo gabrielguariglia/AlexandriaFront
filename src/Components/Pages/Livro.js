@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Image, Table, Button } from 'react-bootstrap';
+import { Container, Row, Col, Image, Table, Button, Spinner } from 'react-bootstrap';
 import { format } from 'date-fns';
 import { useParams } from "react-router-dom";
 
@@ -29,7 +29,12 @@ const Livro = () => {
   }, [id, API_KEY]);
 
   if (!livro) {
-    return null; // ou renderize um componente de carregamento aqui
+    return (
+      <>
+        <Spinner animation="border" size="sm" variant="primary" />
+        Carregando Livro...
+      </>
+    );
   }
 
   return (
@@ -38,7 +43,7 @@ const Livro = () => {
         <Container style={{ height: '100%' }} className="d-flex align-items-center justify-content-center">
           <Row>
             <Col xs={12} md={4}>
-              <Image src={livro.capa} fluid style={{ height: '500px', width: '700px'}}/>
+              <Image src={livro.capa} fluid style={{ height: '500px', width: '700px' }} />
             </Col>
             <Col xs={12} md={8}>
               <Table>
