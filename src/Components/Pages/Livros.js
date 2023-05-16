@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Spinner } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { format } from 'date-fns';
 
@@ -22,6 +23,26 @@ function Livros() {
       console.log(error);
     }
   };
+
+  if (livros.length === 0){
+    return (
+      <div className="container mt-5">
+        <h1 className="mb-5">Livros disponíveis</h1>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">Autor</th>
+              <th scope="col">Género</th>
+              <th scope="col">Ano</th>
+            </tr>
+          </thead>
+        </table>
+        <Spinner animation="border" size="sm" variant="primary" />
+        Carregando Livros...
+      </div>
+    );
+  }
 
   return (
     <div className="container mt-5">
