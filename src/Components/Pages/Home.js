@@ -50,10 +50,11 @@ function Home() {
   };
 
   return (
-    <>
+    <> <div className="container" style={{ overflowX: 'hidden' }}>
       <Row className="justify-content-center">
         {renderLivros()}
       </Row>
+    </div>
     </>
   );
 }
