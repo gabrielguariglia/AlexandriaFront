@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Row, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function Home() { 
+function Home() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [setLivroId] = useState('');
   const [livros, setLivros] = useState([]);
@@ -32,7 +32,9 @@ function Home() {
   const renderLivros = () => {
     return livros.map(livro => (
       <Card key={livro.id} style={{ margin: '5%', width: '15rem' }}>
-        <Card.Img variant="top" src={livro.capa} />
+        <div style={{ height: '300px' }}>
+          <Card.Img variant="top" src={livro.capa} style={{ marginTop: '5%',height: '100%', width: '100%', objectFit: 'cover' }} />
+        </div>
         <Card.Body>
           <Card.Title>{livro.titulo}</Card.Title>
           <Card.Text>{livro.autor}</Card.Text>
@@ -43,7 +45,7 @@ function Home() {
       </Card>
     ));
   };
-  
+
   return (
     <>
       <Row className="justify-content-center">
