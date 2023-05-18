@@ -2,14 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { format } from 'date-fns';
+import { useLocation, Link } from 'react-router-dom';
 
 function Livros() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [livros, setLivros] = useState([]);
+  const [livrosFiltrados, setLivrosFiltrados] = useState([]);
+  
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchTerm = searchParams.get('search');
 
   useEffect(() => {
     fetchLivros();
   }, []);
+
+  useEffect(() => {
+    filterLivros();
+  }, [searchTerm, livros]);
 
   const fetchLivros = async () => {
     try {
@@ -24,7 +34,18 @@ function Livros() {
     }
   };
 
-  if (livros.length === 0){
+  const filterLivros = () => {
+    if (searchTerm) {
+      const filteredLivros = livros.filter(livro =>
+        livro.titulo.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setLivrosFiltrados(filteredLivros);
+    } else {
+      setLivrosFiltrados(livros);
+    }
+  };
+
+  if (livros.length === 0) {
     return (
       <div className="container mt-5">
         <h1 className="mb-5">Livros disponíveis</h1>
@@ -47,28 +68,36 @@ function Livros() {
   return (
     <div className="container mt-5">
       <h1 className="mb-5">Livros disponíveis</h1>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Título</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Género</th>
-            <th scope="col">Ano</th>
-          </tr>
-        </thead>
-        <tbody>
-          {livros.map((livro, index) => (
-            <tr key={index}>
-              <td>{livro.titulo}</td>
-              <td>{livro.autor}</td>
-              <td>{livro.genero}</td>
-              <td>{format(new Date(livro.datapublicacao), 'dd/MM/yyyy')}</td>
+      {livrosFiltrados.length === 0 ? (
+        <p>Nenhum livro encontrado</p>
+      ) : (
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">Autor</th>
+              <th scope="col">Género</th>
+              <th scope="col">Ano</th>
+              <th scope="col">Ações</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {livrosFiltrados.map((livro, index) => (
+              <tr key={index}>
+                <td>{livro.titulo}</td>
+                <td>{livro.autor}</td>
+                <td>{livro.genero}</td>
+                <td>{format(new Date(livro.datapublicacao), 'dd/MM/yyyy')}</td>
+                <td>
+                  <Link to={`/livro/${livro.id}`} className="btn btn-primary btn-sm">Ver Livro</Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
-  );
+  );  
 }
 
 export default Livros;
