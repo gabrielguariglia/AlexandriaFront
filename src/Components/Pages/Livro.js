@@ -28,6 +28,16 @@ const Livro = () => {
     fetchLivro();
   }, [id, API_KEY]);
 
+  const handleDownload = () => {
+    // Simular o download do arquivo do livro
+    const link = document.createElement('a');
+    link.href = livro.arquivo;
+    link.download = `livro_${livro.titulo}.pdf`;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.click();
+  };
+
   if (!livro) {
     return (
       <>
@@ -73,8 +83,12 @@ const Livro = () => {
                 </tbody>
               </Table>
               <div className="d-flex justify-content-center mt-5">
-                <Button variant="danger" className="mx-2">Baixar PDF</Button>
-                <Button variant="primary" className="mx-2">Ler Online</Button>
+                <Button variant="danger" className="mx-2" onClick={handleDownload}>
+                  Baixar PDF
+                </Button>
+                <Button variant="primary" className="mx-2">
+                  Ler Online
+                </Button>
               </div>
             </Col>
           </Row>

@@ -7,6 +7,7 @@ import Home from './Components/Pages/Home';
 import Livro from './Components/Pages/Livro';
 import Livros from './Components/Pages/Livros';
 import Search from './Components/Pages/Search';
+import FileUploadForm from './Components/upload';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/livro/:id" element={<Livro />} />
           <Route path="/livros" element={<Livros />} />
+          <Route path="/upload" element={<FileUploadForm />} />
         </Routes>
       </>
     </BrowserRouter>
