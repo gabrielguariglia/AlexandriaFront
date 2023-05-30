@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const API_KEY = process.env.REACT_APP_API_KEY;
-  const [setLivroId] = useState('');
+  const [livroId, setLivroId] = useState('');
   const [livros, setLivros] = useState([]);
 
   useEffect(() => {

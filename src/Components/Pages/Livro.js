@@ -29,9 +29,10 @@ const Livro = () => {
   }, [id, API_KEY]);
 
   const handleDownload = () => {
-    // Simular o download do arquivo do livro
+    const arquivoURL = `https://alexandria2.000webhostapp.com/${livro.arquivo}`;
+
     const link = document.createElement('a');
-    link.href = livro.arquivo;
+    link.href = arquivoURL;
     link.download = `livro_${livro.titulo}.pdf`;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
