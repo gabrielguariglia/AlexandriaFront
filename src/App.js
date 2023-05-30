@@ -7,7 +7,7 @@ import Home from './Components/Pages/Home';
 import Livro from './Components/Pages/Livro';
 import Livros from './Components/Pages/Livros';
 import Search from './Components/Pages/Search';
-import FileUploadForm from './Components/upload';
+import FileUploadForm from './Components/Pages/upload';
 
 function App() {
   return (
