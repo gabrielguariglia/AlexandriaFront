@@ -29,15 +29,32 @@ const Livro = () => {
   }, [id, API_KEY]);
 
   const handleDownload = () => {
-    const arquivoURL = `https://alexandria2.000webhostapp.com/${livro.arquivo}`;
-
-    const link = document.createElement('a');
-    link.href = arquivoURL;
-    link.download = `livro_${livro.titulo}.pdf`;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.click();
+    const fileName = `livro_${livro.titulo}.pdf`;
+  
+    // Chame o endpoint de download do seu backend
+    fetch(`https://alexandria2.000webhostapp.com/download.php?file=${livro.arquivo}`)
+      .then(response => {
+        // Verifique se a resposta é bem-sucedida
+        if (response.ok) {
+          // Obtém o arquivo blob da resposta
+          response.blob().then(blob => {
+            // Cria um link temporário para download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = window.URL.createObjectURL(blob);
+            downloadLink.download = fileName;
+            downloadLink.target = '_blank';
+            downloadLink.rel = 'noopener noreferrer';
+            downloadLink.click();
+          });
+        } else {
+          console.error('Falha ao fazer o download do arquivo.');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
+  
 
   if (!livro) {
     return (
