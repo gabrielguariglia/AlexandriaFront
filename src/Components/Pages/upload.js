@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button , Alert} from 'react-bootstrap';
 
 const FileUploadForm = () => {
   const [file, setFile] = useState(null);
@@ -53,6 +53,12 @@ const FileUploadForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!titulo || !datapublicacao || !autor || !idioma || !genero || !file) {
+      setErrorMessage('Preencha todos os campos obrigatórios.');
+      setSuccessMessage('');
+      return;
+    }
+
     // Cria um objeto FormData para enviar os dados e o arquivo
     const formData = new FormData();
     formData.append('pdf', file);
@@ -98,8 +104,6 @@ const FileUploadForm = () => {
     <Container>
       <Row className="justify-content-center">
         <Col md={7}>
-          {successMessage && <div className="success-message">{successMessage}</div>}
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
           <Form onSubmit={handleSubmit}>
             <Form.Group as={Row} controlId="formTitulo">
               <Form.Label column sm={3}>
@@ -187,6 +191,12 @@ const FileUploadForm = () => {
               </Button>
             </Col>
           </Form>
+          {successMessage && <div className="success-message"><Alert variant="success" className="overlay-message">
+            {successMessage}
+          </Alert></div>}
+          {errorMessage && <div className="error-message"><Alert variant="danger" className="overlay-message">
+            {errorMessage}
+          </Alert></div>}
         </Col>
       </Row>
     </Container>
