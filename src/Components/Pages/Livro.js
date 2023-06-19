@@ -57,7 +57,8 @@ const Livro = () => {
   
   const handleLerOnline = () => {
     const fileName2 = `${livro.leituraonline}`;
-  
+
+  if (livro.leituraonline) {
     // Chame o endpoint de download do seu backend
     fetch(`https://alexandria2.000webhostapp.com/apilivros.php?key=${API_KEY}&file=${livro.leituraonline}`)
       .then(response => {
@@ -67,8 +68,6 @@ const Livro = () => {
           response.blob().then(blob => {
             const downloadLink = document.createElement('a');
             downloadLink.href = window.URL.createObjectURL(blob);
-           
-           
             // Cria um link temporário para download
             const endereco = fileName2;
               console.log(endereco);
@@ -82,7 +81,12 @@ const Livro = () => {
       .catch(error => {
         console.error(error);
       });
-  };
+  } else {
+    // Caso o campo leituraonline seja null, abrir o arquivo PDF diretamente
+    const arquivo = `https://alexandria2.000webhostapp.com/${livro.arquivo}`;
+    window.open(arquivo, '_blank');
+  }
+};
 
   if (!livro) {
     return (

@@ -10,7 +10,9 @@ const FileUploadForm = () => {
   const [idioma, setIdioma] = useState('');
   const [genero, setGenero] = useState('');
   const [capa, setCapa] = useState('');
-  const [leituraonline, setLeituraOnline] = useState('');
+  const [flipbook, setFlipbook] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -44,8 +46,8 @@ const FileUploadForm = () => {
     setCapa(event.target.value);
   };
 
-  const handleLeituraOnlineChange = (event) => {
-    setLeituraOnline(event.target.value);
+  const handleFlipbookChange = (event) => {
+    setFlipbook(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -61,7 +63,7 @@ const FileUploadForm = () => {
     formData.append('idioma', idioma);
     formData.append('genero', genero);
     formData.append('capa', capa);
-    formData.append('leituraonline', leituraonline);
+    formData.append('flipbook', flipbook);
 
     try {
       const response = await fetch('https://alexandria2.000webhostapp.com/upload.php', {
@@ -70,8 +72,24 @@ const FileUploadForm = () => {
       });
 
       const data = await response.text();
+      setSuccessMessage('Arquivo enviado com sucesso!');
+      setErrorMessage('');
       console.log(data);
+
+      // Limpa os campos do formulário após o envio bem-sucedido
+      setTitulo('');
+      setDataPublicacao('');
+      setEditora('');
+      setAutor('');
+      setIdioma('');
+      setGenero('');
+      setCapa('');
+      setFlipbook('');
+      setFile(null);
+
     } catch (error) {
+      setErrorMessage('Erro ao enviar o arquivo: ' + error.message);
+      setSuccessMessage('');
       console.error('Erro ao enviar o arquivo:', error);
     }
   };
@@ -79,7 +97,9 @@ const FileUploadForm = () => {
   return (
     <Container>
       <Row className="justify-content-center">
-        <Col md={6}>
+        <Col md={7}>
+          {successMessage && <div className="success-message">{successMessage}</div>}
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
           <Form onSubmit={handleSubmit}>
             <Form.Group as={Row} controlId="formTitulo">
               <Form.Label column sm={3}>
@@ -91,10 +111,10 @@ const FileUploadForm = () => {
             </Form.Group>
             <Form.Group as={Row} controlId="formDataPublicacao">
               <Form.Label column sm={3}>
-                Data de Publicação
+                Ano de Lançamento
               </Form.Label>
               <Col sm={9}>
-                <Form.Control type="text" placeholder="Data de Publicação" value={datapublicacao} onChange={handleDataPublicacaoChange} />
+                <Form.Control type="text" placeholder="Ano de Lançamento" value={datapublicacao} onChange={handleDataPublicacaoChange} />
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="formEditora">
@@ -118,7 +138,12 @@ const FileUploadForm = () => {
                 Idioma
               </Form.Label>
               <Col sm={9}>
-                <Form.Control type="text" placeholder="Idioma" value={idioma} onChange={handleIdiomaChange} />
+                <Form.Control as="select" value={idioma} onChange={handleIdiomaChange}>
+                  <option value="">Selecione um Idioma</option>
+                  <option value="inglês">Inglês</option>
+                  <option value="português">Português</option>
+                  <option value="espanhol">Espanhol</option>
+                </Form.Control>
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="formGenero">
@@ -137,13 +162,12 @@ const FileUploadForm = () => {
                 <Form.Control type="text" placeholder="Link da imagem" onChange={handleCapaChange} />
               </Col>
             </Form.Group>
-
-            <Form.Group as={Row} controlId="formPdf">
+            <Form.Group as={Row} controlId="formFlipbook">
               <Form.Label column sm={3}>
                 Flipbook*
               </Form.Label>
               <Col sm={9}>
-                <Form.Control type="text" placeholder="Flipbook" onChange={handleCapaChange} />
+                <Form.Control type="text" placeholder="Flipbook" onChange={handleFlipbookChange} />
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="formPdf">
@@ -151,7 +175,7 @@ const FileUploadForm = () => {
                 PDF
               </Form.Label>
               <Col sm={9}>
-                <Form.Control type="file" accept=".pdf" onChange={handleLeituraOnlineChange} />
+                <Form.Control type="file" accept=".pdf" onChange={handleFileChange} />
               </Col>
             </Form.Group>
             <Col className="text-center">

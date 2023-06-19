@@ -8,7 +8,7 @@ function Livros() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [livros, setLivros] = useState([]);
   const [livrosFiltrados, setLivrosFiltrados] = useState([]);
-  
+
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchTerm = searchParams.get('search');
@@ -23,7 +23,9 @@ function Livros() {
 
   const fetchLivros = async () => {
     try {
-      const response = await fetch(`https://alexandria2.000webhostapp.com/apilivros.php?key=${API_KEY}`);
+      const response = await fetch(
+        `https://alexandria2.000webhostapp.com/apilivros.php?key=${API_KEY}`
+      );
       if (!response.ok) {
         throw new Error('Erro ao obter dados da API');
       }
@@ -36,8 +38,11 @@ function Livros() {
 
   const filterLivros = () => {
     if (searchTerm) {
-      const filteredLivros = livros.filter(livro =>
-        livro.titulo.toLowerCase().includes(searchTerm.toLowerCase())
+      const filteredLivros = livros.filter(
+        (livro) =>
+          livro.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          livro.autor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          livro.genero.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setLivrosFiltrados(filteredLivros);
     } else {
@@ -89,7 +94,9 @@ function Livros() {
                 <td>{livro.genero}</td>
                 <td>{format(new Date(livro.datapublicacao), 'dd/MM/yyyy')}</td>
                 <td>
-                  <Link to={`/livro/${livro.id}`} className="btn btn-primary btn-sm">Ver Livro</Link>
+                  <Link to={`/livro/${livro.id}`} className="btn btn-primary btn-sm">
+                    Ver Livro
+                  </Link>
                 </td>
               </tr>
             ))}
@@ -97,7 +104,8 @@ function Livros() {
         </table>
       )}
     </div>
-  );  
+  );
 }
 
 export default Livros;
+
