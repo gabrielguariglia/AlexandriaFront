@@ -55,6 +55,34 @@ const Livro = () => {
       });
   };
   
+  const handleLerOnline = () => {
+    const fileName2 = `${livro.leituraonline}`;
+  
+    // Chame o endpoint de download do seu backend
+    fetch(`https://alexandria2.000webhostapp.com/apilivros.php?key=${API_KEY}&file=${livro.leituraonline}`)
+      .then(response => {
+        // Verifique se a resposta é bem-sucedida
+        if (response.ok) {
+          // Obtém o arquivo blob da resposta
+          response.blob().then(blob => {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = window.URL.createObjectURL(blob);
+           
+           
+            // Cria um link temporário para download
+            const endereco = fileName2;
+              console.log(endereco);
+      // Abrir o link em uma nova janela
+            window.open(endereco, '_blank');
+          });
+        } else {
+          console.error('Falha ao fazer o download do arquivo.');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
   if (!livro) {
     return (
@@ -104,7 +132,7 @@ const Livro = () => {
                 <Button variant="danger" className="mx-2" onClick={handleDownload}>
                   Baixar PDF
                 </Button>
-                <Button variant="primary" className="mx-2">
+                <Button variant="primary" className="mx-2" onClick={handleLerOnline}>
                   Ler Online
                 </Button>
               </div>

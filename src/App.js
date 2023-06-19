@@ -22,6 +22,7 @@ function App() {
             <Search />
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/livros">Livros</Nav.Link>
+            <Nav.Link as={Link} to="/upload">Envie um livro</Nav.Link>
           </Nav>
         </Navbar>
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 const FileUploadForm = () => {
   const [file, setFile] = useState(null);
@@ -8,7 +9,8 @@ const FileUploadForm = () => {
   const [autor, setAutor] = useState('');
   const [idioma, setIdioma] = useState('');
   const [genero, setGenero] = useState('');
-  const [capa, setCapa] = useState(null);
+  const [capa, setCapa] = useState('');
+  const [leituraonline, setLeituraOnline] = useState('');
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -42,6 +44,10 @@ const FileUploadForm = () => {
     setCapa(event.target.value);
   };
 
+  const handleLeituraOnlineChange = (event) => {
+    setLeituraOnline(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -55,6 +61,7 @@ const FileUploadForm = () => {
     formData.append('idioma', idioma);
     formData.append('genero', genero);
     formData.append('capa', capa);
+    formData.append('leituraonline', leituraonline);
 
     try {
       const response = await fetch('https://alexandria2.000webhostapp.com/upload.php', {
@@ -70,18 +77,95 @@ const FileUploadForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      
-      <input type="text" name="titulo" placeholder="Título" value={titulo} onChange={handleTituloChange} />
-      <input type="text" name="datapublicacao" placeholder="Data de Publicação" value={datapublicacao} onChange={handleDataPublicacaoChange} />
-      <input type="text" name="editora" placeholder="Editora" value={editora} onChange={handleEditoraChange} />
-      <input type="text" name="autor" placeholder="Autor" value={autor} onChange={handleAutorChange} />
-      <input type="text" name="idioma" placeholder="Idioma" value={idioma} onChange={handleIdiomaChange} />
-      <input type="text" name="genero" placeholder="Gênero" value={genero} onChange={handleGeneroChange} />
-      <input type="text" name="capa" accept="image/*" onChange={handleCapaChange} />
-      <input type="file" name="pdf" accept=".pdf" onChange={handleFileChange} />
-      <button type="submit">Enviar</button>
-    </form>
+    <Container>
+      <Row className="justify-content-center">
+        <Col md={6}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group as={Row} controlId="formTitulo">
+              <Form.Label column sm={3}>
+                Título
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control type="text" placeholder="Título" value={titulo} onChange={handleTituloChange} />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formDataPublicacao">
+              <Form.Label column sm={3}>
+                Data de Publicação
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control type="text" placeholder="Data de Publicação" value={datapublicacao} onChange={handleDataPublicacaoChange} />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formEditora">
+              <Form.Label column sm={3}>
+                Editora
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control type="text" placeholder="Editora" value={editora} onChange={handleEditoraChange} />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formAutor">
+              <Form.Label column sm={3}>
+                Autor
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control type="text" placeholder="Autor" value={autor} onChange={handleAutorChange} />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formIdioma">
+              <Form.Label column sm={3}>
+                Idioma
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control type="text" placeholder="Idioma" value={idioma} onChange={handleIdiomaChange} />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formGenero">
+              <Form.Label column sm={3}>
+                Gênero
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control type="text" placeholder="Gênero" value={genero} onChange={handleGeneroChange} />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formCapa">
+              <Form.Label column sm={3}>
+                Capa
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control type="text" placeholder="Link da imagem" onChange={handleCapaChange} />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formPdf">
+              <Form.Label column sm={3}>
+                Flipbook*
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control type="text" placeholder="Flipbook" onChange={handleCapaChange} />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formPdf">
+              <Form.Label column sm={3}>
+                PDF
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control type="file" accept=".pdf" onChange={handleLeituraOnlineChange} />
+              </Col>
+            </Form.Group>
+            <Col className="text-center">
+              *opcional
+            </Col>
+            <Col className="text-center">
+              <Button variant="primary" type="submit">
+                Enviar
+              </Button>
+            </Col>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
