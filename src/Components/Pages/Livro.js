@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Image, Table, Button, Spinner } from 'react-bootstrap';
-import { format } from 'date-fns';
+import noImage from '../images/noImage.png';
 import { useParams } from "react-router-dom";
 
 const Livro = () => {
@@ -30,7 +30,7 @@ const Livro = () => {
 
   const handleDownload = () => {
     const fileName = `livro_${livro.titulo}.pdf`;
-  
+
     // Chame o endpoint de download do seu backend
     fetch(`https://alexandria2.000webhostapp.com/download.php?file=${livro.arquivo}`)
       .then(response => {
@@ -54,39 +54,39 @@ const Livro = () => {
         console.error(error);
       });
   };
-  
+
   const handleLerOnline = () => {
     const fileName2 = `${livro.leituraonline}`;
 
-  if (livro.leituraonline) {
-    // Chame o endpoint de download do seu backend
-    fetch(`https://alexandria2.000webhostapp.com/apilivros.php?key=${API_KEY}&file=${livro.leituraonline}`)
-      .then(response => {
-        // Verifique se a resposta é bem-sucedida
-        if (response.ok) {
-          // Obtém o arquivo blob da resposta
-          response.blob().then(blob => {
-            const downloadLink = document.createElement('a');
-            downloadLink.href = window.URL.createObjectURL(blob);
-            // Cria um link temporário para download
-            const endereco = fileName2;
+    if (livro.leituraonline) {
+      // Chame o endpoint de download do seu backend
+      fetch(`https://alexandria2.000webhostapp.com/apilivros.php?key=${API_KEY}&file=${livro.leituraonline}`)
+        .then(response => {
+          // Verifique se a resposta é bem-sucedida
+          if (response.ok) {
+            // Obtém o arquivo blob da resposta
+            response.blob().then(blob => {
+              const downloadLink = document.createElement('a');
+              downloadLink.href = window.URL.createObjectURL(blob);
+              // Cria um link temporário para download
+              const endereco = fileName2;
               console.log(endereco);
-      // Abrir o link em uma nova janela
-            window.open(endereco, '_blank');
-          });
-        } else {
-          console.error('Falha ao fazer o download do arquivo.');
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  } else {
-    // Caso o campo leituraonline seja null, abrir o arquivo PDF diretamente
-    const arquivo = `https://alexandria2.000webhostapp.com/${livro.arquivo}`;
-    window.open(arquivo, '_blank');
-  }
-};
+              // Abrir o link em uma nova janela
+              window.open(endereco, '_blank');
+            });
+          } else {
+            console.error('Falha ao fazer o download do arquivo.');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } else {
+      // Caso o campo leituraonline seja null, abrir o arquivo PDF diretamente
+      const arquivo = `https://alexandria2.000webhostapp.com/${livro.arquivo}`;
+      window.open(arquivo, '_blank');
+    }
+  };
 
   if (!livro) {
     return (
@@ -103,7 +103,11 @@ const Livro = () => {
         <Container style={{ height: '100%' }} className="d-flex align-items-center justify-content-center">
           <Row>
             <Col xs={12} md={4}>
-              <Image src={livro.capa} fluid style={{ height: '500px', width: '700px' }} />
+              {livro.capa ? (
+                <Image src={livro.capa} fluid style={{ height: '500px', width: '700px' }} />
+              ) : (
+                <Image src={noImage} fluid style={{ height: '500px', width: '700px' }} />
+              )}
             </Col>
             <Col xs={12} md={8}>
               <Table>
@@ -124,7 +128,7 @@ const Livro = () => {
                   </tr>
                   <tr>
                     <td>Lançamento</td>
-                    <td>{format(new Date(livro.datapublicacao), 'dd/MM/yyyy')}</td>
+                    <td>{livro.datapublicacao}</td>
                   </tr>
                   <tr>
                     <td>Língua</td>

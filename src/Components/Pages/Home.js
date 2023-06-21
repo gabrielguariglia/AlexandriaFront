@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import { Button, Row, Card, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import noImage from '../images/noImage.png';
 
 function Home() {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -27,16 +28,28 @@ function Home() {
 
   if (livros.length === 0) {
     return <>
-    <Spinner animation="border" size="sm" variant="primary" />
-    Carregando livros...
-  </>
+      <Spinner animation="border" size="sm" variant="primary" />
+      Carregando livros...
+    </>
   }
 
   const renderLivros = () => {
     return livros.map(livro => (
       <Card key={livro.id} style={{ margin: '5%', width: '15rem' }}>
         <div style={{ height: '300px' }}>
-          <Card.Img variant="top" src={livro.capa} style={{ marginTop: '5%',height: '100%', width: '100%', objectFit: 'cover' }} />
+          {livro.capa ? (
+            <Card.Img
+              variant="top"
+              src={livro.capa}
+              style={{ marginTop: '5%', height: '100%', width: '100%', objectFit: 'cover' }}
+            />
+          ) : (
+            <Card.Img
+              variant="top"
+              src={noImage}
+              style={{ marginTop: '5%', height: '100%', width: '100%', objectFit: 'cover' }}
+            />
+          )}
         </div>
         <Card.Body>
           <Card.Title>{livro.titulo}</Card.Title>
