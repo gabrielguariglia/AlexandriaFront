@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { format } from 'date-fns';
 import { useLocation, Link } from 'react-router-dom';
 
 function Livros() {
@@ -83,7 +82,6 @@ function Livros() {
               <th scope="col">Autor</th>
               <th scope="col">Género</th>
               <th scope="col">Ano</th>
-              <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -92,7 +90,7 @@ function Livros() {
                 <td>{livro.titulo}</td>
                 <td>{livro.autor}</td>
                 <td>{livro.genero}</td>
-                <td>{format(new Date(livro.datapublicacao), 'dd/MM/yyyy')}</td>
+                <td>{livro.datapublicacao}</td>
                 <td>
                   <Link to={`/livro/${livro.id}`} className="btn btn-primary btn-sm">
                     Ver Livro
