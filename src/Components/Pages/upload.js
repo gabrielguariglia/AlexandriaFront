@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button , Alert} from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 
 const FileUploadForm = () => {
   const [file, setFile] = useState(null);
@@ -10,7 +10,7 @@ const FileUploadForm = () => {
   const [idioma, setIdioma] = useState('');
   const [genero, setGenero] = useState('');
   const [capa, setCapa] = useState('');
-  const [flipbook, setFlipbook] = useState('');
+  const [leituraonline, setLeituraOnline] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -46,14 +46,14 @@ const FileUploadForm = () => {
     setCapa(event.target.value);
   };
 
-  const handleFlipbookChange = (event) => {
-    setFlipbook(event.target.value);
+  const handleLeituraOnlineChange = (event) => {
+    setLeituraOnline(event.target.value);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!titulo || !datapublicacao || !autor || !idioma || !genero || !file) {
+    if (!titulo || !datapublicacao || !editora || !autor || !idioma || !genero || !file) {
       setErrorMessage('Preencha todos os campos obrigatórios.');
       setSuccessMessage('');
       return;
@@ -69,7 +69,7 @@ const FileUploadForm = () => {
     formData.append('idioma', idioma);
     formData.append('genero', genero);
     formData.append('capa', capa);
-    formData.append('flipbook', flipbook);
+    formData.append('leituraonline', leituraonline);
 
     try {
       const response = await fetch('https://alexandria2.000webhostapp.com/upload.php', {
@@ -90,7 +90,7 @@ const FileUploadForm = () => {
       setIdioma('');
       setGenero('');
       setCapa('');
-      setFlipbook('');
+      setLeituraOnline('');
       setFile(null);
 
     } catch (error) {
@@ -142,12 +142,12 @@ const FileUploadForm = () => {
                 Idioma
               </Form.Label>
               <Col sm={9}>
-                <Form.Control as="select" value={idioma} onChange={handleIdiomaChange}>
+                <Form.Select as="select" value={idioma} onChange={handleIdiomaChange}>
                   <option value="">Selecione um Idioma</option>
                   <option value="inglês">Inglês</option>
                   <option value="português">Português</option>
                   <option value="espanhol">Espanhol</option>
-                </Form.Control>
+                </Form.Select>
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="formGenero">
@@ -155,23 +155,38 @@ const FileUploadForm = () => {
                 Gênero
               </Form.Label>
               <Col sm={9}>
-                <Form.Control type="text" placeholder="Gênero" value={genero} onChange={handleGeneroChange} />
+              <Form.Select as="select" value={genero} onChange={handleGeneroChange}>
+                  <option value="">Selecione um gênero</option>
+                  <option value="Romance">Romance</option>
+                  <option value="Ficção Literária">Ficção Literária</option>
+                  <option value="Ficção Cientifíca">Ficção Cientifíca</option>
+                  <option value="Ficção Histórica">Ficção Histórica</option>
+                  <option value="Infantil">Infantil</option>
+                  <option value="Infanto Juvenil">Infanto Juvenil</option>
+                  <option value="Aventura">Aventura</option>
+                  <option value="Novela">Novela</option>
+                  <option value="Horror">Horror</option>
+                  <option value="Biografia">Biografia</option>
+                  <option value="História">História</option>
+                  <option value="Religião">Religião</option>
+                  <option value="Humor">Humor</option>
+                </Form.Select>
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="formCapa">
               <Form.Label column sm={3}>
-                Capa
+                Capa*
               </Form.Label>
               <Col sm={9}>
                 <Form.Control type="text" placeholder="Link da imagem" onChange={handleCapaChange} />
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="formFlipbook">
+            <Form.Group as={Row} controlId="formleituraOnline">
               <Form.Label column sm={3}>
                 Flipbook*
               </Form.Label>
               <Col sm={9}>
-                <Form.Control type="text" placeholder="Flipbook" onChange={handleFlipbookChange} />
+                <Form.Control type="text" placeholder="Flipbook" onChange={handleLeituraOnlineChange}/>
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="formPdf">
