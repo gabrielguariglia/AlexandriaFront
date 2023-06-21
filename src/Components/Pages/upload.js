@@ -53,7 +53,7 @@ const FileUploadForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!titulo || !datapublicacao || !editora || !autor || !idioma || !genero || !file) {
+    if (!titulo || !datapublicacao || !autor || !idioma || !genero || !file) {
       setErrorMessage('Preencha todos os campos obrigatórios.');
       setSuccessMessage('');
       return;
@@ -123,7 +123,7 @@ const FileUploadForm = () => {
             </Form.Group>
             <Form.Group as={Row} controlId="formEditora">
               <Form.Label column sm={3}>
-                Editora
+                Editora*
               </Form.Label>
               <Col sm={9}>
                 <Form.Control type="text" placeholder="Editora" value={editora} onChange={handleEditoraChange} />

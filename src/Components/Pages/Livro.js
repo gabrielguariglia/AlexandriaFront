@@ -119,6 +119,10 @@ const Livro = () => {
                     <td>{livro.autor}</td>
                   </tr>
                   <tr>
+                    <td>Editora</td>
+                    <td>{livro.editora ? livro.editora : 'Não informado'}</td>
+                  </tr>
+                  <tr>
                     <td>Lançamento</td>
                     <td>{format(new Date(livro.datapublicacao), 'dd/MM/yyyy')}</td>
                   </tr>
